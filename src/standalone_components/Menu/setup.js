@@ -1,11 +1,11 @@
 ﻿import $A from '../AccDC'
 import MenuConfigFunction from './aria_menu_module.js'
 
-export default function setMenu(){
+export default function setMenu(callback){
 	// Configure menu functionality
-
 	$A.setMenu('button.menu', 'hiddenDivId', 'menu-options', function(ev, dc){
-		alert('Do something with this.href or id="' + this.id + '"');
+		
+		callback(ev, dc, this)
 	}, true, document,
 					{
 
