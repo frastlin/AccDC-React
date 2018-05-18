@@ -34,6 +34,6 @@ What are the following items?
 
 ## standalone_components/DataGrid/aria_data_grid_module.js
 
-
+Where does ~type: 'toggle'~ come from in the gridcell object in the last colum in the for loop?
 
 

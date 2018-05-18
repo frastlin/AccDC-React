@@ -11,12 +11,31 @@ export default class DataGrid extends Component{
 	constructor(props){
 		super(props)
 		this.state = {
+			columnNames: props.columnNames,
+			cells: props.cells
 		}
 	}
 
 	componentDidMount(){
-		setupGrid()
+		this.grid = setupGrid({
+			columnNames: this.state.columnNames
+		})
+		this.setCells()
 	}
+
+	setCells(){
+		this.state.cells.map((row, tIndex)=>{
+				this.grid.add({
+						id: tIndex,
+						cells: row
+						});
+
+		if (tIndex == 10)
+			// Render the first page and load all other records in the background
+			this.grid.openPage(1);
+		})
+	}
+
 
 	render(){
 		return(
