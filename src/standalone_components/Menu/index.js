@@ -49,14 +49,21 @@ export default class Menu extends Component{
 	static defaultProps = {
 		id: 0,
 		menuItemCallback: (ev, dc, context)=>alert("Do something with this id: " + context.id),
-		topLevelId: "menu-options"
+		horizontal: false,
+		topLevelId: "menu-options",
+		text: "Options (Vertical Dropdown)"
 	}
 
 	constructor(props){
 		super(props)
-		this.state = {}
+		this.state = {
+			ev: null,
+			dc: null,
+			context: null
+		}
 		this.createId = MenuItem.prototype.createId
 		this.children = this.createOptions(props.children, props.topLevelId)
+		this.menuItemCallback = this.menuItemCallback.bind(this)
 	}
 
 	createOptions(children, currentId, menus=[], currentTitle=undefined){
@@ -74,14 +81,19 @@ export default class Menu extends Component{
 		}
 	}
 
+	menuItemCallback(ev, dc, context){
+		this.setState({ ev, dc, context})
+		this.props.menuItemCallback(ev, dc, context)
+	}
+
 	componentDidMount(){
-		setupMenu(this.props.menuItemCallback)
+		setupMenu(this.menuItemCallback, this.props.horizontal)
 	}
 
 	render(){
 		return(
 			<div>
-			<button className="menu">Options (Vertical Dropdown)</button>
+			<button className="menu">{this.props.text}</button>
 
 			<div id="hiddenDivId" className="hidden">
 				{this.children}

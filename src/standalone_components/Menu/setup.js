@@ -1,10 +1,9 @@
 ﻿import $A from '../AccDC'
 import MenuConfigFunction from './aria_menu_module.js'
 
-export default function setMenu(callback){
+export default function setMenu(callback, isHorizontal=false){
 	// Configure menu functionality
 	$A.setMenu('button.menu', 'hiddenDivId', 'menu-options', function(ev, dc){
-		
 		callback(ev, dc, this)
 	}, true, document,
 					{
@@ -43,7 +42,7 @@ export default function setMenu(callback){
 					// Specify if the menu is a flyout menu
 					// If true, the Left and Right arrow keys will scroll the open menu
 					// If false, the Up and Down arrow keys will scroll the open menu instead
-					horizontal: false,
+					horizontal: isHorizontal,
 					autoPosition: 0,
 					// Set custom offset values to adjust the positioning calculation
 					// May return a positive or negative number
